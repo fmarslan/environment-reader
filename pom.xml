@@ -9,19 +9,19 @@
 	</parent>
 	<groupId>com.fmarslan.tools</groupId>
 	<artifactId>environment-reader</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-3</version>
 	<name>FM Environment Reader</name>
 	<description>Environment reader from different file format</description>
 	<url>https://github.com/fmarslan</url>
 	<licenses>
-	  <license>
-		<name>The Apache License, Version 2.0</name>
-		<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-	  </license>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
 	</licenses>
 	<developers>
-    <developer>
-		<name>Fatih Mehmet ARSLAN</name>
+		<developer>
+			<name>Fatih Mehmet ARSLAN</name>
 			<email>contact@fmarslan.com</email>
 			<organization>fmarslan</organization>
 			<organizationUrl>https://github.com/fmarslan</organizationUrl>

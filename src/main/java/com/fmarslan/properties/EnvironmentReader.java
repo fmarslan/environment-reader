@@ -19,6 +19,9 @@ package com.fmarslan.properties;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -55,7 +58,7 @@ public class EnvironmentReader {
 		instance = new EnvironmentReader(override);
 	}
 
-	public <T> T getEnvironment(String key) {
+	public static <T> T getEnvironment(String key) {
 		return instance.get(key);
 	}
 
@@ -111,16 +114,14 @@ public class EnvironmentReader {
 
 	public void load(Class<?> clazz, String file) {
 		try {
-			if (clazz.getClassLoader().getResource(file) == null) {
-				LOGGER.error(String.format("%s file is not exists", file));
+			File fileObject = File.createTempFile(file, file.replaceAll("/", "_").replaceAll("\\", "_"));
+			copyInputStreamToFile(clazz.getResourceAsStream(file), fileObject);
+			if (fileObject.exists() == false) {
+				LOGGER.error(String.format("%s file is not exists [%s]", file, fileObject.getPath()));
 			} else {
-				File fileObject = new File(clazz.getClassLoader().getResource(file).getFile());
-				if (fileObject.exists() == false) {
-					LOGGER.error(String.format("%s file is not exists [%s]", file, fileObject.getPath()));
-				} else {
-					load(fileObject);
-				}
+				load(fileObject);
 			}
+
 		} catch (Exception e) {
 			LOGGER.error("initProperties", e);
 		}
@@ -279,6 +280,24 @@ public class EnvironmentReader {
 	public static void main(String[] args) {
 		EnvironmentReader pm = new EnvironmentReader();
 		pm.load(pm.getClass(), "test.xml");
+	}
+
+	private static void copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
+
+		try (FileOutputStream outputStream = new FileOutputStream(file)) {
+
+			int read;
+			byte[] bytes = new byte[1024];
+
+			while ((read = inputStream.read(bytes)) != -1) {
+				outputStream.write(bytes, 0, read);
+			}
+
+			// commons-io
+			// IOUtils.copy(inputStream, outputStream);
+
+		}
+
 	}
 
 }
