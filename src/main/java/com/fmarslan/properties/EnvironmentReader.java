@@ -114,7 +114,7 @@ public class EnvironmentReader {
 
 	public void load(Class<?> clazz, String file) {
 		try {
-			File fileObject = File.createTempFile(file, file.replaceAll("/", "_").replaceAll("\\", "_"));
+			File fileObject = File.createTempFile(file, file.replaceAll("/", "_").replaceAll("\\\\", "_"));
 			copyInputStreamToFile(clazz.getResourceAsStream(file), fileObject);
 			if (fileObject.exists() == false) {
 				LOGGER.error(String.format("%s file is not exists [%s]", file, fileObject.getPath()));
