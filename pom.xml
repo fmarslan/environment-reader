@@ -33,7 +33,7 @@
 		<url>https://github.com/fmarslan/environment-reader</url>
 	</scm>
 	<properties>
-		<org.yaml.snakeyaml.version>1.25</org.yaml.snakeyaml.version>
+		<org.yaml.snakeyaml.version>1.26</org.yaml.snakeyaml.version>
 		<org.slf4j.version>1.7.10</org.slf4j.version>
 		<java.version>1.8</java.version>
 	</properties>
